@@ -4,5 +4,5 @@ Information system for sport club using [python-telegram-bot](https://github.com
 
 ## Creators
 
-* [Alexey Shmevel](https://github.com/alexeyshmelev)
+* [Alexey Shmelev](https://github.com/alexeyshmelev)
 * [Dmitry Maslikov](https://github.com/Amideamon)
