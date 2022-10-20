@@ -1,0 +1,43 @@
+version: "3.7"
+
+# Define services/containers
+services:
+  # MySQL container
+  mysql:
+    # Use mysql:8.0.19 image
+    image: mysql:8.0.19
+    # Connect to "my-network" network, as defined below
+    networks:
+      - my-network
+    # Pass a list of environment variables to the container
+    environment:
+      MYSQL_ROOT_PASSWORD: ###your_password###
+
+    volumes:
+      - type: bind
+        source: ./backup
+        target: /home
+
+    # after executing this container, enter it and run start.sh
+
+  # phpMyAdmin container
+  phpmyadmin:
+    # Use phpmyadmin/phpmyadmin:5.0.2 image
+    image: phpmyadmin/phpmyadmin:5.0.2
+    # Connect to "my-network" network, as defined below
+    networks:
+      - my-network
+    # Map port 8080 on the host to port 80 inside the container
+    # Syntax is: "HOST_PORT:CONTAINER_PORT"
+    ports:
+      - "###external_port###:80"
+    # Pass a list of environment variables to the container
+    environment:
+      PMA_HOST: mysql
+    # Wait for "mysql" container to start first
+    depends_on:
+      - mysql
+
+# Define networks
+networks:
+  my-network:
